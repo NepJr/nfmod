@@ -1,4 +1,4 @@
-package nepjr.nfmod.common.metatileentities;
+package nepjr.nfmod.gregtech.metatileentities;
 
 import static gregtech.api.util.GTUtility.gregtechId;
 
@@ -20,6 +20,8 @@ import gregtech.api.util.Mods;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityEnergyHatch;
 import gregtech.integration.jei.multiblock.MultiblockInfoCategory;
+import nepjr.nfmod.gregtech.machines.AdvancedAL;
+import nepjr.nfmod.gregtech.machines.AdvancedLCR;
 import net.minecraft.util.ResourceLocation;
 
 public class NFMetaTileEntities 
@@ -34,6 +36,11 @@ public class NFMetaTileEntities
     public static final MetaTileEntityEnergyHatch[] MAX_INPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
     public static final MetaTileEntityEnergyHatch[] MAX_OUTPUT_HATCH = new MetaTileEntityEnergyHatch[GTValues.V.length];
     
+    
+    // Multiblocks
+    public static AdvancedLCR ADVANCED_LCR;
+    public static AdvancedAL ADVANCED_AL;
+    
     public static void init()
     {
     	MAX_INPUT_HATCH[14] = registerMetaTileEntity(4000,
@@ -41,6 +48,12 @@ public class NFMetaTileEntities
     
     	MAX_OUTPUT_HATCH[14] = registerMetaTileEntity(4001,
                 new MetaTileEntityEnergyHatch(gregtechId("energy_hatch.output." + GTValues.VN[14].toLowerCase()), 14, 2, true));
+
+    	ADVANCED_LCR = registerMetaTileEntity(5000,
+                new AdvancedLCR(gregtechId("advanced_lcr")));
+    	
+    	ADVANCED_AL = registerMetaTileEntity(5001,
+                new AdvancedAL(gregtechId("advanced_al")));
 
     }
     
