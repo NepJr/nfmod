@@ -39,4 +39,25 @@
  */
 dependencies {
 
+    // CCL, CT dep for GT (from GTCEu Maven)
+    // Included to allow compiling of certain Draconic Evolution Mixin Classes, and as transitive deps
+    implementation ("codechicken:codechickenlib:3.2.3.358") // Version 3.2.3.358
+
+    // GT and GCYM, pretty much the 'core' of this coremod (from GTCEu Maven)
+    // GT Has Mixins! CHECK MIXINS FOR COMPAT AFTER UPDATING!
+    implementation ("gregtech:gregtech:2.8.7-beta") {
+        transitive = false
+    } // Version 2.8.7
+    implementation ("gregicality:GregicalityMultiblocks:1.2.8") {
+        transitive = false
+    } // Version 1.2.8
+
+    // GroovyScript (from Cleanroom Maven)
+    implementation ("com.cleanroommc:groovyscript:0.8.0") {
+        transitive = false
+    } // Version 0.8.0
+
+    //AE2 Unofficial Extended Life (from CurseForge)
+    implementation rfg.deobf("curse.maven:ae2-extended-life-570458:4851091") // Version 0.55.27
+
 }
