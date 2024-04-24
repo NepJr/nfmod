@@ -13,6 +13,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.CraftingComponent.Component;
+import nepjr.nfmod.gregtech.materials.NFMaterials;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
@@ -258,6 +259,22 @@ public class NFCraftingComponent extends CraftingComponent
         { 7, new UnificationEntry(OrePrefix.wireGtOctal, Materials.VanadiumGallium) },
         { 8, new UnificationEntry(OrePrefix.wireGtOctal, Materials.YttriumBariumCuprate) },
         { 9, new UnificationEntry(OrePrefix.wireGtOctal, Materials.Europium) },
+
+	}).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
+	
+	PLATE = new Component(Stream.of(new Object[][] {
+
+        { 0, new UnificationEntry(OrePrefix.plate, Materials.WroughtIron) },
+        { 1, new UnificationEntry(OrePrefix.plate, Materials.Steel) },
+        { 2, new UnificationEntry(OrePrefix.plate, Materials.Aluminium) },
+        { 3, new UnificationEntry(OrePrefix.plate, Materials.StainlessSteel) },
+        { 4, new UnificationEntry(OrePrefix.plate, Materials.Titanium) },
+        { 5, new UnificationEntry(OrePrefix.plate, Materials.TungstenSteel) },
+        { 6, new UnificationEntry(OrePrefix.plate, Materials.RhodiumPlatedPalladium) },
+        { 7, new UnificationEntry(OrePrefix.plate, Materials.NaquadahAlloy) },
+        { 8, new UnificationEntry(OrePrefix.plate, Materials.Darmstadtium) },
+        { 9, new UnificationEntry(OrePrefix.plate, Materials.Neutronium) },
+        { 10, new UnificationEntry(OrePrefix.plate, NFMaterials.orundum) },
 
 	}).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 	
