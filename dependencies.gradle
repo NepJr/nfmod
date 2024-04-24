@@ -59,5 +59,8 @@ dependencies {
 
     //AE2 Unofficial Extended Life (from CurseForge)
     implementation rfg.deobf("curse.maven:ae2-extended-life-570458:4851091") // Version 0.55.27
+    
+    //Endercore because I need it for some reason
+    compileOnly rfg.deobf("curse.maven:endercore-231868:4671384")
 
 }

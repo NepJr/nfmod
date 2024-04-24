@@ -27,6 +27,7 @@ public class NFGregTech
 	{
 		NFMetaTileEntities.init();
 		NFMetaBlocks.init();
+		NFMetaItems.initMetaItems();
 	}
 	
 	public static void init(FMLInitializationEvent event)
@@ -45,6 +46,8 @@ public class NFGregTech
 	
 	@SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
+		NFMetaItems.init();
+		
 		NFMod.LOGGER.info("Registering Items...");
         IForgeRegistry<Item> registry = event.getRegistry();
 
