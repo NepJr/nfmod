@@ -7,6 +7,8 @@ import gregtech.api.GregTechAPI;
 import gregtech.api.event.HighTierEvent;
 import nepjr.nfmod.gregtech.NFGregTech;
 import nepjr.nfmod.gregtech.metatileentities.NFMetaTileEntities;
+import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

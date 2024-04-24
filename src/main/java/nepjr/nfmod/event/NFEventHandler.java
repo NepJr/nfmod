@@ -24,7 +24,6 @@ public class NFEventHandler
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void initComponents(RegistryEvent.Register<IRecipe> event) {
-        GTRecipeInputCache.enableCache();
         NFCraftingComponent.initializeComponents();
         MinecraftForge.EVENT_BUS.post(new GregTechAPI.RegisterEvent<>(null, NFCraftingComponent.class));
     }
