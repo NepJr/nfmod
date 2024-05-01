@@ -104,7 +104,7 @@ public class NFMaterials
 		// Modify existing materials here
 		Materials.Neutronium.addFlags(MaterialFlags.GENERATE_FINE_WIRE, MaterialFlags.GENERATE_ROUND, MaterialFlags.GENERATE_RING);
 		
-		Materials.Neutronium.setProperty(PropertyKey.WIRE, new WireProperties((int) GTValues.V[GTValues.UHV], 2, 4, false));
+		Materials.Neutronium.setProperty(PropertyKey.WIRE, new WireProperties((int) GTValues.V[GTValues.UHV], 8, 1, false));
 		
 		Materials.Tritanium.addFlags(MaterialFlags.GENERATE_ROTOR);
 		
