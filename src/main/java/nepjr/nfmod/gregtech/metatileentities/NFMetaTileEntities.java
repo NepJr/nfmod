@@ -22,6 +22,8 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityEnerg
 import gregtech.integration.jei.multiblock.MultiblockInfoCategory;
 import nepjr.nfmod.gregtech.machines.AdvancedAL;
 import nepjr.nfmod.gregtech.machines.AdvancedLCR;
+import nepjr.nfmod.gregtech.machines.OreCrusher;
+import nepjr.nfmod.gregtech.machines.TimeManipulationDevice;
 import net.minecraft.util.ResourceLocation;
 
 public class NFMetaTileEntities 
@@ -40,6 +42,8 @@ public class NFMetaTileEntities
     // Multiblocks
     public static AdvancedLCR ADVANCED_LCR;
     public static AdvancedAL ADVANCED_AL;
+    public static OreCrusher ORE_CRUSHER;
+    public static TimeManipulationDevice timeMachine;
     
     public static void init()
     {
@@ -54,6 +58,12 @@ public class NFMetaTileEntities
     	
     	ADVANCED_AL = registerMetaTileEntity(5001,
                 new AdvancedAL(gregtechId("advanced_al")));
+    	
+    	ORE_CRUSHER = registerMetaTileEntity(5002,
+    			new OreCrusher(gregtechId("ore_crusher")));
+    	
+    	timeMachine = registerMetaTileEntity(5003,
+    			new TimeManipulationDevice(gregtechId("time_machine")));
 
     }
     

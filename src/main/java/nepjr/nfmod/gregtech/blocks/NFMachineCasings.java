@@ -21,7 +21,7 @@ public class NFMachineCasings extends VariantBlock<NFMachineCasings.MetalCasingT
         setHardness(5.0f);
         setResistance(10.0f);
         setSoundType(SoundType.METAL);
-        setDefaultState(getState(MetalCasingType.ORUNDUM_CASING));
+        setDefaultState(getState(MetalCasingType.GRINDING_CASING));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class NFMachineCasings extends VariantBlock<NFMachineCasings.MetalCasingT
 
     public enum MetalCasingType implements IStringSerializable, IStateHarvestLevel {
 
-        ORUNDUM_CASING("orundum_casing", 2);
+        GRINDING_CASING("grinding_casing", 2);
 
         private final String name;
         private final int harvestLevel;

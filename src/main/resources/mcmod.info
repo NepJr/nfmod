@@ -1,12 +1,12 @@
 [{
-    "modid": "${modid}",
-    "name": "${modname}",
-    "description": "An example mod for Minecraft 1.12.2 with Forge",
-    "version": "${version}",
-    "mcversion": "${mcversion}",
+    "modid": "nfmod",
+    "name": "Nep Factory",
+    "description": "GregTech addon for a modpack",
+    "version": "0.0.1",
+    "mcversion": "1.12.2",
     "logoFile": "",
     "url": "",
-    "authorList": [],
+    "authorList": ["NepJr"],
     "credits": "",
     "dependencies": []
 }]

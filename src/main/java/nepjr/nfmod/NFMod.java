@@ -19,7 +19,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 	name = NFTags.MODNAME, 
 	acceptedMinecraftVersions = "[1.12.2]",
 	dependencies = "required-after:gregtech@[2.8,);" 
-				 + "required-after:gcym@[1.2.8,);")
+				 + "required-after:gcym@[1.2.8,);"
+				 + "required-after:avaritia;"
+				 + "required-after:singularities;")
 public class NFMod 
 {
 	public static final Logger LOGGER = LogManager.getLogger(NFTags.MODID);

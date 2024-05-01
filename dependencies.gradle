@@ -56,6 +56,18 @@ dependencies {
     implementation ("com.cleanroommc:groovyscript:0.8.0") {
         transitive = false
     } // Version 0.8.0
+    
+    // Craft Tweaker, GT Compile dep
+    implementation "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.684" // Version 4.1.20.684
+    
+    implementation rfg.deobf("curse.maven:avaritia-1-10-261348:3143349")
+    
+    implementation rfg.deobf("curse.maven:singularities-280741:2707834")
+    
+    implementation rfg.deobf("curse.maven:placebo-283644:4629597")
+
+    // CTM, GT Compile Dep
+    compileOnly "curse.maven:ctm-267602:2915363" // Version 1.0.2.31
 
     //AE2 Unofficial Extended Life (from CurseForge)
     implementation rfg.deobf("curse.maven:ae2-extended-life-570458:4851091") // Version 0.55.27
