@@ -1,7 +1,11 @@
 package nepjr.nfmod.gregtech.machines;
 
+import java.util.ArrayList;
+
 import org.jetbrains.annotations.NotNull;
 
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.Widget.ClickData;
@@ -11,27 +15,44 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import nepjr.nfmod.gregtech.blocks.NFMachineCasings;
 import nepjr.nfmod.gregtech.blocks.NFMetaBlocks;
-import nepjr.nfmod.gregtech.recipes.NFRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 
-public class TimeManipulationDevice extends RecipeMapMultiblockController
+public class TimeManipulationDevice extends MultiblockWithDisplayBase
 {
+	private IEnergyContainer energyContainer;
+	
 	public TimeManipulationDevice(ResourceLocation metaTileEntityId) {
-		super(metaTileEntityId, NFRecipeMaps.EMPTY);
+		super(metaTileEntityId);
 	}
+	
+	protected void initializeAbilities() {
+        this.energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.INPUT_ENERGY));
+    }
+
+    private void resetTileAbilities() {
+        this.energyContainer = new EnergyContainerList(new ArrayList<>());
+    }
+    
+    @Override
+    protected void formStructure(PatternMatchContext context) 
+    {
+        super.formStructure(context);
+        initializeAbilities();
+    }
 
 	@NotNull
 	@Override
@@ -57,6 +78,11 @@ public class TimeManipulationDevice extends RecipeMapMultiblockController
 	public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
 		// TODO Auto-generated method stub
 		return Textures.STABLE_TITANIUM_CASING;
+	}
+	
+	public IEnergyContainer getEnergyContainer()
+	{
+		return this.energyContainer;
 	}
 	
 	@Override
@@ -110,5 +136,11 @@ public class TimeManipulationDevice extends RecipeMapMultiblockController
         	}
         }
     }
+
+	@Override
+	protected void updateFormedValid() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
