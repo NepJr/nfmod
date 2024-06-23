@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+      "model": "nfmod:launch_pad"
+    },
+    "variants": {
+      "normal": [{}],
+      "inventory": [{}]
+    }
+}
