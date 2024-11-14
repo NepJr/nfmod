@@ -96,9 +96,9 @@ public class MaterialUtil
 		return materialRegistry.get(material.getId())[0];
 	}
 	
-	public WorldProvider getMaterialPlanet(Material material)
+	public int getMaterialPlanetDimensionId(Material material)
 	{
-		return null;
+		return materialRegistry.get(material.getId())[1];
 	}
 	
 	private static void addToRegistry(Material material, int tier, DimensionType type)
