@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import gregtech.GTInternalTags;
+import nepjr.nf.api.util.MaterialUtil;
 import nepjr.nf.cmd.CommandDimTP;
 import nepjr.nf.cmd.CommandGetProvider;
 import nepjr.nf.common.metatileentities.NFMetaTileEntities;
@@ -41,6 +42,7 @@ public class NepFactory {
     @EventHandler
     public void init(FMLInitializationEvent event) 
     {
+    	MaterialUtil.buildMaterialRegistry();
     	NFRecipes.register();
     }
 
