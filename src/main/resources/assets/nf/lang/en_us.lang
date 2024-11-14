@@ -1,0 +1,20 @@
+////////
+// UI //
+////////
+
+nf.gui.solar_array.solar_count=Panels: %s
+nf.gui.solar_array.efficiency=Solar Efficiency: %s
+nf.gui.solar_array.debug.provider=Provider: %s
+nf.gui.solar_array.base_generation=EU/t per panel: %s
+nf.gui.solar_array.actual_generation=Generation: %s
+//////////
+// MISC //
+//////////
+
+nf.tooltip.max_parallel=Max Parallel:
+
+////////////////////////////////////
+// MATERIALS (in numerical order) //
+////////////////////////////////////
+nf.material.mostimite=Mostimite
+nf.material.fiammettite=Fiammettite
