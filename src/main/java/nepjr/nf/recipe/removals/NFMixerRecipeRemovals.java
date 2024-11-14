@@ -14,7 +14,6 @@ public class NFMixerRecipeRemovals
 	
 	public static void start()
 	{
-		
 		// Black Steel x 5
 		GTRecipeHandler.removeRecipesByInputs(RecipeMaps.MIXER_RECIPES, 
 				new ItemStack[] {

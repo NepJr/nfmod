@@ -17,7 +17,7 @@ public class NFRecipeRemovals
 		ModHandler.removeRecipeByName("gregtech:maintenance_hatch_automatic");
 		ModHandler.removeRecipeByName("gregtech:maintenance_hatch_cleaning");
 		
-		// Dual Interface Block to Panel
+		// Dual Interface Block to Panel and vice versa
 		ModHandler.removeRecipeByName("ae2fc:part_dual_interface");
 		ModHandler.removeRecipeByName("ae2fc:dual_interface_alter");
 	}
