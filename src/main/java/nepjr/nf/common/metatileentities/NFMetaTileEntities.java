@@ -20,7 +20,7 @@ public class NFMetaTileEntities
 	@Deprecated
 	public static MetaTileEntitySolarPanel SOLAR_PANEL;
 	
-	public static MetaTileEntitySolarArray SOLAR_ARRAY;
+	public static MetaTileEntitySolarArray[] SOLAR_ARRAY = new MetaTileEntitySolarArray[GTValues.V.length - 1];
 	
 	public static MetaTileEntitySolarPanelPart[] SOLAR_PANEL_PART = new MetaTileEntitySolarPanelPart[GTValues.V.length - 1];
 	
@@ -30,13 +30,13 @@ public class NFMetaTileEntities
 		
 		SOLAR_PANEL = registerMetaTileEntity(4001, new MetaTileEntitySolarPanel(nfId("solar_panel.uv"), GTValues.UV));
 		
-		SOLAR_ARRAY = registerMetaTileEntity(4002, new MetaTileEntitySolarArray(nfId("solar_array_i"), GTValues.HV));
-		
 		// Solar Panel Parts
 		int endPos = GregTechAPI.isHighTier() ? SOLAR_PANEL_PART.length : Math.min(SOLAR_PANEL_PART.length - 1, GTValues.UV + 2);
         for (int i = 0; i < endPos; i++) {
         	SOLAR_PANEL_PART[i] = new MetaTileEntitySolarPanelPart(nfId("solar_panel_part." + GTValues.VN[i].toLowerCase()), i);
+        	SOLAR_ARRAY[i] = new MetaTileEntitySolarArray(nfId("solar_array." + GTValues.VN[i]), i);
             registerMetaTileEntity(4100 + i, SOLAR_PANEL_PART[i]);
+            registerMetaTileEntity(4120 + i, SOLAR_ARRAY[i]);
         }
 	}
 }
