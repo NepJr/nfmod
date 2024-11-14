@@ -21,7 +21,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -32,7 +31,6 @@ import nepjr.nf.api.capability.ISolarPanel;
 import nepjr.nf.api.metatileentity.multiblock.NFMultiblockAbility;
 import nepjr.nf.api.util.DimensionUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -44,9 +42,9 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
 	private final int tier;
 	private boolean isWorkingEnabled;
 	private List<ISolarPanel> solarPanels;
-	private int eut;
+	int panels = 0;
+	private long eut;
 	
-	@SuppressWarnings("unused")
 	private IEnergyContainer energyContainer;
 	
 	public MetaTileEntitySolarArray(ResourceLocation metaTileEntityId, int tier) {
@@ -59,13 +57,47 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
     protected void updateFormedValid() {
         if (!getWorld().isRemote) 
         {
-        	eut = (int) Math.ceil((GTValues.V[tier] * solarPanels.size()) * DimensionUtil.getSolarEfficiency(getWorld().provider));
-        	if(eut > energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage())
+        	if(!(getWorld().getWorldInfo().isRaining() || getWorld().getWorldInfo().isThundering()) && getWorld().isDaytime())
         	{
-        		eut = (int) (energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage());
+        		/*
+        		 * There probably is a more efficient way to check each panel if they
+        		 * can see the sun or not but this is the only method I could easily think
+        		 * of that works. Probably unnecessarily increases the usage and might cause
+        		 * TPS issues down the line in bases with a lot of these but oh well
+        		 * 
+        		 * future problem for future me
+        		 * 
+        		 * Granted it shouldn't be an issue so long as you remember to not block
+        		 * the solar panel's sight to the sun
+        		 */
+        		panels = solarPanels.size();
+        		for(int j = 0; j < solarPanels.size(); j++)
+            	{
+            		if(solarPanels.get(j).canSeeSun() == false)
+            		{
+            			panels--;
+            		}
+            	}
+        		
+        		if(panels == 0) // If somehow all the panels are blocked, invalidate the multiblock
+        		{
+        			invalidateStructure();
+        		}
+        		
+        		// All should be good, add energy into the system
+        		
+            	eut = (long) Math.ceil((GTValues.V[tier] * panels) * DimensionUtil.getSolarEfficiency(getWorld().provider));
+            	if(eut > energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage())
+            	{
+            		eut = (energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage());
+            	}
+            	eut = eut * (6 - this.getNumMaintenanceProblems()) / 6;
+            	energyContainer.addEnergy(eut);
         	}
-        	eut = eut * (6 - this.getNumMaintenanceProblems()) / 6;
-        	energyContainer.addEnergy(eut);
+        	else
+        	{
+        		eut = 0;
+        	}
         }
     }
 	
@@ -77,7 +109,11 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
         {
         	invalidateStructure();
         }
-        else // Only run additional checks if there are actually panels, otherwise IndexOutOfBounds errors occur
+        /*
+         *  Only run additional checks if there are actually panels, otherwise IndexOutOfBounds errors occur 
+         *  also there's no point checking these if there aren't any in the first place lol
+         */
+        else 
         {
         	for(int i = 1; i < solarPanels.size(); i++) // All panels need to be the same tier
             {
@@ -90,6 +126,13 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
             {
             	invalidateStructure();
             }
+        }
+        for(int i = 0; i < solarPanels.size(); i++) // Make sure the solar panels can actually see the sun
+        {
+        	if(solarPanels.get(i).canSeeSun() == false)
+    		{
+    			invalidateStructure();
+    		}
         }
     }
 
@@ -110,8 +153,8 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
 				.where('Y', selfPredicate())
 				.where('X', states(getCasingState()))
 				.where('O', states(getCasingState())
-						.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1))
-						.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1)))
+						.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+						.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1).setMinGlobalLimited(1)))
 				.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
 						.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
 				.build();
@@ -138,18 +181,17 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
         MultiblockDisplayText.builder(textList, isStructureFormed())
                 .setWorkingStatus(true, isActive())
                 .addCustom(tl ->
-                {
-                	int solarNumbers = solarPanels.size();
-                	
+                {         	
                 	ITextComponent panelCount = TextComponentUtil.stringWithColor(
                             TextFormatting.GOLD,
-                            TextFormattingUtil.formatNumbers(solarNumbers));
+                            TextFormattingUtil.formatNumbers(panels));
                 	
                 	ITextComponent efficiencyRating = TextComponentUtil.stringWithColor(
                             TextFormatting.GOLD,
                             TextFormattingUtil.formatNumbers(DimensionUtil.getSolarEfficiency(this.getWorld().provider) * 100) + "%");
                 	
-                	ITextComponent providerName = TextComponentUtil.stringWithColor(
+                	@SuppressWarnings("unused")
+					ITextComponent providerName = TextComponentUtil.stringWithColor(
                 			TextFormatting.GOLD, 
                 			this.getWorld().provider.toString());
                 	
