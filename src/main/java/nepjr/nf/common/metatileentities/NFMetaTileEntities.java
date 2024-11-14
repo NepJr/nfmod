@@ -14,6 +14,10 @@ public class NFMetaTileEntities
 {
 	public static MetaTileEntityTestMultiblock TEST;
 	
+	/**
+	 * Solar Array multiblock exists, much better to just use that honestly 
+	 */
+	@Deprecated
 	public static MetaTileEntitySolarPanel SOLAR_PANEL;
 	
 	public static MetaTileEntitySolarArray SOLAR_ARRAY;
