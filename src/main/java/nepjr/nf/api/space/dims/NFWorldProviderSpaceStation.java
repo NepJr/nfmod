@@ -110,7 +110,4 @@ public abstract class NFWorldProviderSpaceStation extends NFWorldProvider
     {
         return 2.5f;
     }
-	
-	@Override
-	public abstract String getSaveFolder();
 }

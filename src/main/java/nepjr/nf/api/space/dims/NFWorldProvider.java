@@ -6,4 +6,6 @@ public abstract class NFWorldProvider extends WorldProvider {
 
 	public abstract float getSolarEfficiency();
 
+	@Override
+	public abstract String getSaveFolder();
 }
