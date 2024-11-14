@@ -19,11 +19,11 @@ public class MaterialUtil
 	public static void buildMaterialRegistry()
 	{
 		/*
-		 *  Ensures the list is populated. 65535 is the max amount of materials you can have
-		 *  If this is greater than 65535, something gone hella wrong tbh
+		 *  Ensures the list is populated. 32767 is the max amount of materials you can have
+		 *  If this is greater than 32767, something gone hella wrong tbh
 		 */
 		
-		for(int i = 0; i < 65535; i++)
+		for(int i = 0; i < 32767; i++)
 		{
 			materialRegistry.add(new int[] {0, 0});
 		}
