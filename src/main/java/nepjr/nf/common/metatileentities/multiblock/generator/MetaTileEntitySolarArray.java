@@ -86,7 +86,7 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
         		
         		// All should be good, add energy into the system
         		
-            	eut = (long) Math.ceil((GTValues.V[solarPanels.get(0).tier()] * panels) * DimensionUtil.getSolarEfficiency(getWorld().provider));
+            	eut = (long) Math.ceil((GTValues.V[tier] * panels) * DimensionUtil.getSolarEfficiency(getWorld().provider));
             	if(eut > energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage())
             	{
             		eut = (energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage());
