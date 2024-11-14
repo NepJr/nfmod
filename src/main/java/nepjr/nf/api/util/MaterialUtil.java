@@ -89,6 +89,11 @@ public class MaterialUtil
 		/*
 		 * Maximum materials
 		 */
+		
+		/*
+		 * Unassigned materials
+		 */
+		
 	}
 	
 	public int getMaterialTier(Material material)
