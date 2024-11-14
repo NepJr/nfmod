@@ -1,12 +1,10 @@
 package nepjr.nf.common.metatileentities;
 
-import static gregtech.api.util.GTUtility.gregtechId;
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static nepjr.nf.NepFactory.nfId;
 
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
-import gregtech.common.metatileentities.electric.MetaTileEntityHull;
 import nepjr.nf.common.metatileentities.generator.MetaTileEntitySolarPanel;
 import nepjr.nf.common.metatileentities.multiblock.generator.MetaTileEntitySolarArray;
 import nepjr.nf.common.metatileentities.multiblock.normal.MetaTileEntityTestMultiblock;

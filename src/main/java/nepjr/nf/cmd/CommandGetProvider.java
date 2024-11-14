@@ -1,6 +1,5 @@
 package nepjr.nf.cmd;
 
-import gregtech.api.util.TextFormattingUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

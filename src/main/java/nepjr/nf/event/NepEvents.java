@@ -4,8 +4,6 @@ import gregtech.api.event.HighTierEvent;
 import gregtech.api.unification.material.event.MaterialEvent;
 import nepjr.nf.NFTags;
 import nepjr.nf.api.unification.NepMaterials;
-import nepjr.nf.space.dims.station.overworld.WorldProviderOverworldSpaceStation;
-import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;

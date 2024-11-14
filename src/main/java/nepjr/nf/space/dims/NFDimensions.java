@@ -2,7 +2,6 @@ package nepjr.nf.space.dims;
 
 import nepjr.nf.NFTags;
 import nepjr.nf.cfg.NFConfig;
-import nepjr.nf.space.dims.planets.vulcanus.WorldProviderVulcanus;
 import nepjr.nf.space.dims.station.overworld.WorldProviderOverworldSpaceStation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;

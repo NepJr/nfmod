@@ -1,7 +1,6 @@
-package nepjr.nf.space.dims.station;
+package nepjr.nf.api.space.dims;
 
 import net.minecraft.world.World;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;

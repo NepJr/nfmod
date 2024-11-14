@@ -1,11 +1,9 @@
 package nepjr.nf.space.dims.planets.vulcanus;
 
 import nepjr.nf.space.dims.NFDimensions;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,8 +36,6 @@ public class WorldProviderVulcanus extends WorldProvider
      */
     protected void generateLightBrightnessTable()
     {
-        float f = 0.1F;
-
         for (int i = 0; i <= 15; ++i)
         {
             float f1 = 1.0F - (float)i / 15.0F;
