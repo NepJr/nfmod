@@ -10,9 +10,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.utils.PipelineUtil;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 public class MetaTileEntityWeatherRepeller extends TieredMetaTileEntity

@@ -1,16 +1,11 @@
 package nepjr.nf.api.util;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import gregtech.api.GTValues;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.material.registry.MaterialRegistry;
-import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import nepjr.nf.space.dims.NFDimensions;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.WorldProvider;
 
 public class MaterialUtil 
 {

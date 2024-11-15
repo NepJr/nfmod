@@ -5,9 +5,7 @@ import static nepjr.nf.NepFactory.nfId;
 
 import gregtech.api.GTValues;
 import nepjr.nf.common.metatileentities.electric.MetaTileEntityWeatherRepeller;
-import nepjr.nf.common.metatileentities.generator.MetaTileEntitySolarPanel;
 import nepjr.nf.common.metatileentities.multiblock.generator.MetaTileEntitySolarArray;
-import nepjr.nf.common.metatileentities.multiblock.normal.MetaTileEntityTestMultiblock;
 import nepjr.nf.common.metatileentities.multiblock.part.MetaTileEntitySolarPanelPart;
 
 public class NFMetaTileEntities
