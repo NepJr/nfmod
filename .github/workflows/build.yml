@@ -47,7 +47,7 @@ jobs:
           fetchViaCommits: true
           failOnError: false
       - name: Release Latest
-        uses: andelf/nightly-release@46e2d5f80828ecc5c2c3c819eb31186a7cf2156c
+        uses: andelf/nightly-release@v1
         with:
             tag_name: latest-${{ github.ref_name }}
             name: '${{ github.ref_name }}-${{ steps.ver.outputs.version}} SNAPSHOT $$'
