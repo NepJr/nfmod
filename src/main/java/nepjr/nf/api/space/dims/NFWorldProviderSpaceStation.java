@@ -22,8 +22,13 @@ public abstract class NFWorldProviderSpaceStation extends NFWorldProvider
 	@Override
 	public void updateWeather()
     {
+		// Client side
         this.world.getWorldInfo().setRaining(false);
         this.world.getWorldInfo().setThundering(false);
+        
+        // Server side
+        this.world.getMinecraftServer().getWorld(getDimension()).getWorldInfo().setRaining(false);
+        this.world.getMinecraftServer().getWorld(getDimension()).getWorldInfo().setThundering(false);
     }
 	
 	@Override
