@@ -26,14 +26,14 @@ public class MetaTileEntityWeatherRepeller extends TieredMetaTileEntity
 	@Override
     protected void reinitializeEnergyContainer() {
 		super.reinitializeEnergyContainer();
-        this.energyContainer = EnergyContainerHandler.receiverContainer(this, GTValues.V[GTValues.IV], GTValues.IV, 1);
+        this.energyContainer = EnergyContainerHandler.receiverContainer(this, GTValues.V[GTValues.IV] * 8, GTValues.IV, 1);
     }
 	
 	@Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline)
     {
 		super.renderMetaTileEntity(renderState, translation, pipeline);
-		Textures.MAINTENANCE_OVERLAY.renderOriented(renderState, translation, pipeline, EnumFacing.UP);
+		Textures.MAINTENANCE_OVERLAY.renderOriented(renderState, translation, pipeline, getFrontFacing());
     }
 	
 	@Override
