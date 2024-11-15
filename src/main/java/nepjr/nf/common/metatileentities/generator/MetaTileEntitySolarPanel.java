@@ -1,5 +1,7 @@
 package nepjr.nf.common.metatileentities.generator;
 
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
+
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -18,6 +20,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+@Deprecated
+@ScheduledForRemoval(inVersion = "1.0.0")
 public class MetaTileEntitySolarPanel extends TieredMetaTileEntity
 {
 

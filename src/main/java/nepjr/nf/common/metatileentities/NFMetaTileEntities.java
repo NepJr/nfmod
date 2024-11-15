@@ -4,7 +4,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import static nepjr.nf.NepFactory.nfId;
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
+import nepjr.nf.common.metatileentities.electric.MetaTileEntityWeatherRepeller;
 import nepjr.nf.common.metatileentities.generator.MetaTileEntitySolarPanel;
 import nepjr.nf.common.metatileentities.multiblock.generator.MetaTileEntitySolarArray;
 import nepjr.nf.common.metatileentities.multiblock.normal.MetaTileEntityTestMultiblock;
@@ -12,23 +12,15 @@ import nepjr.nf.common.metatileentities.multiblock.part.MetaTileEntitySolarPanel
 
 public class NFMetaTileEntities
 {
-	public static MetaTileEntityTestMultiblock TEST;
-	
-	/**
-	 * Solar Array multiblock exists, much better to just use that honestly 
-	 */
-	@Deprecated
-	public static MetaTileEntitySolarPanel SOLAR_PANEL;
-	
 	public static MetaTileEntitySolarArray[] SOLAR_ARRAY = new MetaTileEntitySolarArray[GTValues.V.length];
 	
 	public static MetaTileEntitySolarPanelPart[] SOLAR_PANEL_PART = new MetaTileEntitySolarPanelPart[GTValues.V.length];
 	
+	public static MetaTileEntityWeatherRepeller WEATHER_REPELLER;
+	
 	public static void init()
 	{
-		TEST = registerMetaTileEntity(4000, new MetaTileEntityTestMultiblock(nfId("test_multi")));
-		
-		SOLAR_PANEL = registerMetaTileEntity(4001, new MetaTileEntitySolarPanel(nfId("solar_panel.uv"), GTValues.UV));
+		WEATHER_REPELLER = registerMetaTileEntity(4000, new MetaTileEntityWeatherRepeller(nfId("weather_repeller")));
 		
         for (int i = 1; i < GTValues.V.length; i++) {
         	SOLAR_PANEL_PART[i] = new MetaTileEntitySolarPanelPart(nfId("solar_panel_part." + GTValues.VN[i].toLowerCase()), i);

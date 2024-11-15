@@ -1,5 +1,6 @@
 package nepjr.nf.common.metatileentities.multiblock.normal;
 
+import org.jetbrains.annotations.ApiStatus.ScheduledForRemoval;
 import org.jetbrains.annotations.NotNull;
 
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -20,6 +21,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@Deprecated
+@ScheduledForRemoval(inVersion = "1.0.0")
 public class MetaTileEntityTestMultiblock extends NFMultiblockController {
 
 	public MetaTileEntityTestMultiblock(ResourceLocation metaTileEntityId) {
