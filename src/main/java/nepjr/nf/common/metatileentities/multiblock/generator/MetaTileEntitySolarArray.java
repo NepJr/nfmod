@@ -44,12 +44,10 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
 	private List<ISolarPanel> solarPanels;
 	int panels = 0;
 	private long eut;
-	
-	private IEnergyContainer energyContainer;
+	private EnergyContainerList outputHatches;
 	
 	public MetaTileEntitySolarArray(ResourceLocation metaTileEntityId, int tier) {
 		super(metaTileEntityId);
-		this.energyContainer = new EnergyContainerList(new ArrayList<>());
 		this.tier = tier;
 	}
 
@@ -87,12 +85,12 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
         		// All should be good, add energy into the system
         		
             	eut = (long) Math.ceil((GTValues.V[solarPanels.get(0).tier()] * panels) * DimensionUtil.getSolarEfficiency(getWorld().provider));
-            	if(eut > energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage())
+            	if(eut > outputHatches.getOutputVoltage() * outputHatches.getOutputAmperage())
             	{
-            		eut = (energyContainer.getOutputVoltage() * energyContainer.getOutputAmperage());
+            		eut = (outputHatches.getOutputVoltage() * outputHatches.getOutputAmperage());
             	}
             	eut = eut * (6 - this.getNumMaintenanceProblems()) / 6;
-            	energyContainer.addEnergy(eut);
+            	outputHatches.addEnergy(eut);
         	}
         	else
         	{
@@ -138,36 +136,158 @@ public class MetaTileEntitySolarArray extends MultiblockWithDisplayBase implemen
 
 	private void initializeAbilities() {
 		solarPanels = new ArrayList<>(getAbilities(NFMultiblockAbility.SOLAR_PANEL));
-        energyContainer = new EnergyContainerList(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+		List<IEnergyContainer> outputs = new ArrayList<>();
+        outputs.addAll(getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+        outputs.addAll(getAbilities(MultiblockAbility.OUTPUT_LASER));
+        this.outputHatches = new EnergyContainerList(outputs);
     }
 
 	@Override
 	protected @NotNull BlockPattern createStructurePattern() {
-		// TODO Auto-generated method stub
-		return FactoryBlockPattern.start()
-				.aisle("OOOOO", "XXXXX")
-				.aisle("OXXXO", "XPPPX")
-				.aisle("OXXXO", "XPPPX")
-				.aisle("OXXXO", "XPPPX")
-				.aisle("OOYOO", "XXXXX")
-				.where('Y', selfPredicate())
-				.where('X', states(getCasingState()))
-				.where('O', states(getCasingState())
-						.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
-						.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1).setMinGlobalLimited(1)))
-				.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
-						.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
-				.build();
+		if(tier <= GTValues.HV)
+		{
+			return FactoryBlockPattern.start()
+					.aisle("OOOOO", "XXXXX")
+					.aisle("OXXXO", "XPPPX")
+					.aisle("OXXXO", "XPPPX")
+					.aisle("OXXXO", "XPPPX")
+					.aisle("OOYOO", "XXXXX")
+					.where('Y', selfPredicate())
+					.where('X', states(getCasingState()))
+					.where('O', states(getCasingState())
+							.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_LASER).setMaxGlobalLimited(1)))
+					.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
+							.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
+					.build();
+		}
+		if(tier > GTValues.HV && tier <= GTValues.LuV)
+		{
+			return FactoryBlockPattern.start()
+					.aisle("OOOOOOO", "XXXXXXX")
+					.aisle("OXXXXXO", "XPPPPPX")
+					.aisle("OXXXXXO", "XPPPPPX")
+					.aisle("OXXXXXO", "XPPPPPX")
+					.aisle("OXXXXXO", "XPPPPPX")
+					.aisle("OXXXXXO", "XPPPPPX")
+					.aisle("OOOYOOO", "XXXXXXX")
+					.where('Y', selfPredicate())
+					.where('X', states(getCasingState()))
+					.where('O', states(getCasingState())
+							.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_LASER).setMaxGlobalLimited(1)))
+					.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
+							.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
+					.build();
+		}
+		if(tier > GTValues.LuV && tier <= GTValues.UHV)
+		{
+			return FactoryBlockPattern.start()
+					.aisle("OOOOOOOOO", "XXXXXXXXX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OXXXXXXXO", "XPPPPPPPX")
+					.aisle("OOOOYOOOO", "XXXXXXXXX")
+					.where('Y', selfPredicate())
+					.where('X', states(getCasingState()))
+					.where('O', states(getCasingState())
+							.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_LASER).setMaxGlobalLimited(1)))
+					.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
+							.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
+					.build();
+		}
+		if(tier > GTValues.UHV && tier <= GTValues.UIV)
+		{
+			return FactoryBlockPattern.start()
+					.aisle("OOOOOOOOOOO", "XXXXXXXXXXX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OXXXXXXXXXO", "XPPPPPPPPPX")
+					.aisle("OOOOOYOOOOO", "XXXXXXXXXXX")
+					.where('Y', selfPredicate())
+					.where('X', states(getCasingState()))
+					.where('O', states(getCasingState())
+							.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_LASER).setMaxGlobalLimited(1)))
+					.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
+							.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
+					.build();
+		}
+		if(tier > GTValues.UHV && tier <= GTValues.UIV)
+		{
+			return FactoryBlockPattern.start()
+					.aisle("OOOOOOOOOOOOO", "XXXXXXXXXXXXX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OXXXXXXXXXXXO", "XPPPPPPPPPPPX")
+					.aisle("OOOOOOYOOOOOO", "XXXXXXXXXXXXX")
+					.where('Y', selfPredicate())
+					.where('X', states(getCasingState()))
+					.where('O', states(getCasingState())
+							.or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setMaxGlobalLimited(1).setMinGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(1))
+							.or(abilities(MultiblockAbility.OUTPUT_LASER).setMaxGlobalLimited(1)))
+					.where('P', abilities(NFMultiblockAbility.SOLAR_PANEL)
+							.or(abilities(MultiblockAbility.PASSTHROUGH_HATCH)))
+					.build();
+		}
+		return null;
 	}
 	
 	@Override
 	public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-		// TODO Auto-generated method stub
+		if(tier == GTValues.HV)
+		{
+			return Textures.CLEAN_STAINLESS_STEEL_CASING;
+		}
+		if(tier == GTValues.EV)
+		{
+			return Textures.STABLE_TITANIUM_CASING;
+		}
+		if(tier == GTValues.IV)
+		{
+			return Textures.ROBUST_TUNGSTENSTEEL_CASING;
+		}
 		return Textures.SOLID_STEEL_CASING;
 	}
 	
 	private IBlockState getCasingState()
 	{
+		if(tier == GTValues.HV)
+		{
+			return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN);
+		}
+		if(tier == GTValues.EV)
+		{
+			return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+		}
+		if(tier == GTValues.IV)
+		{
+			return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TITANIUM_STABLE);
+		}
 		return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
 	}
 	
