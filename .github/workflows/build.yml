@@ -49,7 +49,7 @@ jobs:
       - name: Release Latest
         uses: andelf/nightly-release@v1
         with:
-            tag_name: latest-${{ github.ref_name }}
+            tag_name: autobuild
             name: '${{ github.ref_name }}-${{ steps.ver.outputs.version}} SNAPSHOT $$'
             prerelease: true
             body: |
