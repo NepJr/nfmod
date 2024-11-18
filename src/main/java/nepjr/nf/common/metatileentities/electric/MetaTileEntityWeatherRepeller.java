@@ -12,19 +12,25 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.client.renderer.texture.Textures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.WorldInfo;
 
 public class MetaTileEntityWeatherRepeller extends TieredMetaTileEntity
 {
 
 	public MetaTileEntityWeatherRepeller(ResourceLocation metaTileEntityId) {
 		super(metaTileEntityId, GTValues.IV);
-		reinitializeEnergyContainer();
 	}
-
+	
 	@Override
     protected void reinitializeEnergyContainer() {
-		super.reinitializeEnergyContainer();
-        this.energyContainer = EnergyContainerHandler.receiverContainer(this, GTValues.V[GTValues.IV] * 8, GTValues.IV, 1);
+        long tierVoltage = GTValues.V[getTier()];
+        this.energyContainer = EnergyContainerHandler.receiverContainer(this,
+                tierVoltage * 16L, tierVoltage, getMaxInputOutputAmperage());
+    }
+	
+	@Override
+    protected long getMaxInputOutputAmperage() {
+        return 1L;
     }
 	
 	@Override
@@ -36,20 +42,32 @@ public class MetaTileEntityWeatherRepeller extends TieredMetaTileEntity
 	
 	@Override
 	public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-		// TODO Auto-generated method stub
 		return new MetaTileEntityWeatherRepeller(metaTileEntityId);
 	}
 
 	@Override
 	public void update()
 	{
-		if(this.energyContainer.getEnergyStored() > GTValues.V[GTValues.IV])
+		super.update();
+		if(this.energyContainer.getEnergyStored() > GTValues.VA[GTValues.IV])
 		{
-			this.energyContainer.removeEnergy(GTValues.V[GTValues.IV]);
-			getWorld().getWorldInfo().setRaining(false);
-			getWorld().getWorldInfo().setThundering(false);
+			WorldInfo worldInfo = getWorld().getWorldInfo() ;
+			this.energyContainer.removeEnergy(GTValues.VA[GTValues.IV]);
+			if(worldInfo.isRaining() || worldInfo.isThundering())
+			{
+				worldInfo.setCleanWeatherTime(12000);
+                worldInfo.setRainTime(0);
+                worldInfo.setThunderTime(0);
+                worldInfo.setRaining(false);
+                worldInfo.setThundering(false);
+			}
 		}
 	}
+	
+	@Override
+    public boolean getIsWeatherOrTerrainResistant() {
+        return true;
+    }
 	
 	@Override
     protected boolean openGUIOnRightClick() {
