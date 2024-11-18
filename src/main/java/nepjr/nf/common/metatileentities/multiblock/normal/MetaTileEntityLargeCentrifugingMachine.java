@@ -31,8 +31,8 @@ public class MetaTileEntityLargeCentrifugingMachine extends NFMultiblockControll
 				.aisle("CCC", "CCC", "CCC")
 				.aisle("CCC", "CCC", "CCC")
 				.aisle("CCC", "CSC", "CCC")
-				.where('s', selfPredicate())
-				.where('c', states(getCasingState())
+				.where('S', selfPredicate())
+				.where('C', states(getCasingState())
 						.or(autoAbilities()))
 				.build();
 	}
