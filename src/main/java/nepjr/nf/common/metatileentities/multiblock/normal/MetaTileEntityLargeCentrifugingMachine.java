@@ -2,6 +2,9 @@ package nepjr.nf.common.metatileentities.multiblock.normal;
 
 import org.jetbrains.annotations.NotNull;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -47,11 +50,21 @@ public class MetaTileEntityLargeCentrifugingMachine extends NFMultiblockControll
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
 	
-	@SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT)
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.LARGE_STEAM_TURBINE_OVERLAY;
+        return Textures.ROTOR_HOLDER_OVERLAY;
+    }
+    
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        if(this.isStructureFormed())
+        {
+        	Textures.LARGE_TURBINE_ROTOR_RENDERER.renderSided(renderState, translation, pipeline, getFrontFacing(),
+                    this != null, true, this.isActive(), 16777215);
+        }
     }
 
 	@Override
