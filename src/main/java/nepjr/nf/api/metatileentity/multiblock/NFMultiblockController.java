@@ -47,7 +47,7 @@ public abstract class NFMultiblockController extends MultiMapMultiblockControlle
             }
             if(multiTier == EnumMultiTier.QUANTUMCOMPUTER)
             {
-            	return NFConfig.machineOptions.parallelLimitQuantumComputer;
+            	return NFConfig.machineOptions.parallelLimitQuantumcomputer;
             }
             if(multiTier == EnumMultiTier.COSMIC)
             {
