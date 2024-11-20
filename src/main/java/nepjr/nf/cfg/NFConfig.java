@@ -25,22 +25,22 @@ public class NFConfig
 	
 	public static class MachineOptions
 	{
-		@Config.Name("Parallel Limit")
+		@Config.Name("Advanced Parallel Limit")
 		@Config.Comment("Controls the maximum parallel multiblocks can preform")
 		@Config.RequiresMcRestart
 		public int parallelLimitAdvanced = 1024;
 		
-		@Config.Name("Parallel Limit")
+		@Config.Name("Supercomputer Parallel Limit")
 		@Config.Comment("Controls the maximum parallel multiblocks can preform")
 		@Config.RequiresMcRestart
 		public int parallelLimitSupercomputer = 4096;
 		
-		@Config.Name("Parallel Limit")
+		@Config.Name("Quantumcomputer Parallel Limit")
 		@Config.Comment("Controls the maximum parallel multiblocks can preform")
 		@Config.RequiresMcRestart
-		public int parallelLimitQuantumComputer = 16384;
+		public int parallelLimitQuantumcomputer = 16384;
 		
-		@Config.Name("Parallel Limit")
+		@Config.Name("Cosmic Parallel Limit")
 		@Config.Comment("Controls the maximum parallel multiblocks can preform")
 		@Config.RequiresMcRestart
 		public int parallelLimitCosmic = 65535;
