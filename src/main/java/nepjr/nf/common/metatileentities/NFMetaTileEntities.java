@@ -18,6 +18,7 @@ public class NFMetaTileEntities
 	
 	// Multiblock Machines
 	public static MetaTileEntityLargeCentrifugingMachine LARGE_CENTRIFUGE;
+	public static MetaTileEntityLargeCentrifugingMachine LARGE_CENTRIFUGE_TEST;
 	public static MetaTileEntityAdvancedCircuitAssembler ADVANCED_CIRCUIT_ASSEMBLER;
 	// Multiblock Parts
 	public static MetaTileEntitySolarPanelPart[] SOLAR_PANEL_PART = new MetaTileEntitySolarPanelPart[GTValues.V.length];
@@ -30,6 +31,7 @@ public class NFMetaTileEntities
 		WEATHER_REPELLER = registerMetaTileEntity(4000, new MetaTileEntityWeatherRepeller(nfId("weather_repeller")));
 		
 		LARGE_CENTRIFUGE = registerMetaTileEntity(4001, new MetaTileEntityLargeCentrifugingMachine(nfId("large_centrifuge"), EnumMultiTier.ADVANCED));
+		LARGE_CENTRIFUGE_TEST = registerMetaTileEntity(4003, new MetaTileEntityLargeCentrifugingMachine(nfId("large_centrifuge_test"), EnumMultiTier.SUPERCOMPUTER));
 		ADVANCED_CIRCUIT_ASSEMBLER = registerMetaTileEntity(4002, new MetaTileEntityAdvancedCircuitAssembler(nfId("advanced_circuit_assembler"), EnumMultiTier.ADVANCED));
 		
         for (int i = 1; i < GTValues.V.length; i++) {
