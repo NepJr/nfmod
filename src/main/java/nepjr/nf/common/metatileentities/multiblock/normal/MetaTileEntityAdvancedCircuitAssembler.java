@@ -33,6 +33,7 @@ import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiFluidHatch;
+import nepjr.nf.api.data.EnumMultiTier;
 import nepjr.nf.api.metatileentity.multiblock.NFMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -41,9 +42,11 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class MetaTileEntityAdvancedCircuitAssembler extends NFMultiblockController 
 {   
-	public MetaTileEntityAdvancedCircuitAssembler(ResourceLocation metaTileEntityId) 
+	private EnumMultiTier multiTier;
+	public MetaTileEntityAdvancedCircuitAssembler(ResourceLocation metaTileEntityId, EnumMultiTier multiTier) 
 	{
-		super(metaTileEntityId, RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES);
+		super(metaTileEntityId, RecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, multiTier);
+		this.multiTier = multiTier;
 	}
 
 	@NotNull
@@ -169,7 +172,7 @@ public class MetaTileEntityAdvancedCircuitAssembler extends NFMultiblockControll
 	@Override
 	public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
 		// TODO Auto-generated method stub
-		return new MetaTileEntityAdvancedCircuitAssembler(metaTileEntityId);
+		return new MetaTileEntityAdvancedCircuitAssembler(metaTileEntityId, multiTier);
 	}
 
 }

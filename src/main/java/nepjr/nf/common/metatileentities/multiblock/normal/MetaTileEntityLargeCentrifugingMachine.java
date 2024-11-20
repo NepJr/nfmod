@@ -15,6 +15,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import nepjr.nf.api.data.EnumMultiTier;
 import nepjr.nf.api.metatileentity.multiblock.NFMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
@@ -23,8 +24,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MetaTileEntityLargeCentrifugingMachine extends NFMultiblockController
 {
-	public MetaTileEntityLargeCentrifugingMachine(ResourceLocation metaTileEntityId) {
-		super(metaTileEntityId, RecipeMaps.CENTRIFUGE_RECIPES);
+	private EnumMultiTier multiTier;
+	public MetaTileEntityLargeCentrifugingMachine(ResourceLocation metaTileEntityId, EnumMultiTier multiTier) {
+		super(metaTileEntityId, RecipeMaps.CENTRIFUGE_RECIPES, multiTier);
+		this.multiTier = multiTier;
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class MetaTileEntityLargeCentrifugingMachine extends NFMultiblockControll
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
-        return Textures.ROTOR_HOLDER_OVERLAY;
+        return Textures.ROTOR_HOLDER_OVERLAY ;
     }
     
     @Override
@@ -70,7 +73,7 @@ public class MetaTileEntityLargeCentrifugingMachine extends NFMultiblockControll
 	@Override
 	public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
 		// TODO Auto-generated method stub
-		return new MetaTileEntityLargeCentrifugingMachine(metaTileEntityId);
+		return new MetaTileEntityLargeCentrifugingMachine(metaTileEntityId, multiTier);
 	}
 
 }

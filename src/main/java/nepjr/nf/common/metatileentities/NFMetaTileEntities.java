@@ -4,6 +4,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import static nepjr.nf.NepFactory.nfId;
 
 import gregtech.api.GTValues;
+import nepjr.nf.api.data.EnumMultiTier;
 import nepjr.nf.common.metatileentities.electric.MetaTileEntityWeatherRepeller;
 import nepjr.nf.common.metatileentities.multiblock.generator.MetaTileEntitySolarArray;
 import nepjr.nf.common.metatileentities.multiblock.normal.MetaTileEntityAdvancedCircuitAssembler;
@@ -28,8 +29,8 @@ public class NFMetaTileEntities
 	{
 		WEATHER_REPELLER = registerMetaTileEntity(4000, new MetaTileEntityWeatherRepeller(nfId("weather_repeller")));
 		
-		LARGE_CENTRIFUGE = registerMetaTileEntity(4001, new MetaTileEntityLargeCentrifugingMachine(nfId("large_centrifuge")));
-		ADVANCED_CIRCUIT_ASSEMBLER = registerMetaTileEntity(4002, new MetaTileEntityAdvancedCircuitAssembler(nfId("advanced_circuit_assembler")));
+		LARGE_CENTRIFUGE = registerMetaTileEntity(4001, new MetaTileEntityLargeCentrifugingMachine(nfId("large_centrifuge"), EnumMultiTier.ADVANCED));
+		ADVANCED_CIRCUIT_ASSEMBLER = registerMetaTileEntity(4002, new MetaTileEntityAdvancedCircuitAssembler(nfId("advanced_circuit_assembler"), EnumMultiTier.ADVANCED));
 		
         for (int i = 1; i < GTValues.V.length; i++) {
         	SOLAR_PANEL_PART[i] = new MetaTileEntitySolarPanelPart(nfId("solar_panel_part." + GTValues.VN[i].toLowerCase()), i);

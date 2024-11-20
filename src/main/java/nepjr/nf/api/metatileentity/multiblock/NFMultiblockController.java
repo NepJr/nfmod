@@ -1,36 +1,59 @@
 package nepjr.nf.api.metatileentity.multiblock;
 
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ParallelLogicType;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.client.utils.TooltipHelper;
+import nepjr.nf.api.data.EnumMultiTier;
 import nepjr.nf.cfg.NFConfig;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
-public abstract class NFMultiblockController extends MultiMapMultiblockController{
+public abstract class NFMultiblockController extends MultiMapMultiblockController {
 
-	public NFMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
-		this(metaTileEntityId, new RecipeMap<?>[] { recipeMap });
+	private EnumMultiTier multiTier;
+	public NFMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, EnumMultiTier multiTier) {
+		this(metaTileEntityId, new RecipeMap<?>[] {recipeMap}, multiTier);
 	}
 	
-	public NFMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
+	public NFMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps, EnumMultiTier multiTier) {
 		super(metaTileEntityId, recipeMaps);
-		this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
-		this.recipeMapWorkable.setParallelLimit(NFConfig.machineOptions.parallelLimit);
+		this.recipeMapWorkable = new NepRecipeLogicThing(this);
+		this.multiTier = multiTier;
 	}
 	
-	@Override
-    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.BLINKING_CYAN + I18n.format("nf.tooltip.max_parallel") + " " + NFConfig.machineOptions.parallelLimit);
-        tooltip.add(TooltipHelper.RAINBOW + I18n.format("gregtech.machine.perfect_oc"));
-    }
+	protected class NepRecipeLogicThing extends MultiblockRecipeLogic {
 
+        public NepRecipeLogicThing(NFMultiblockController tileEntity) {
+            super(tileEntity, true); // all these machines will have perfect overclock because I'm a nice guy
+        }
+
+        @NotNull
+        @Override
+        public ParallelLogicType getParallelLogicType() {
+            return ParallelLogicType.APPEND_ITEMS;
+        }
+        
+        @Override
+        public int getParallelLimit() {
+            if(multiTier == EnumMultiTier.ADVANCED)
+            {
+            	return NFConfig.machineOptions.parallelLimitAdvanced;
+            }
+            if(multiTier == EnumMultiTier.SUPERCOMPUTER)
+            {
+            	return NFConfig.machineOptions.parallelLimitSupercomputer;
+            }
+            if(multiTier == EnumMultiTier.QUANTUMCOMPUTER)
+            {
+            	return NFConfig.machineOptions.parallelLimitQuantumComputer;
+            }
+            if(multiTier == EnumMultiTier.COSMIC)
+            {
+            	return NFConfig.machineOptions.parallelLimitCosmic;
+            }
+            return 1;
+        }
+    }
 }

@@ -28,7 +28,22 @@ public class NFConfig
 		@Config.Name("Parallel Limit")
 		@Config.Comment("Controls the maximum parallel multiblocks can preform")
 		@Config.RequiresMcRestart
-		public int parallelLimit = 16384;
+		public int parallelLimitAdvanced = 1024;
+		
+		@Config.Name("Parallel Limit")
+		@Config.Comment("Controls the maximum parallel multiblocks can preform")
+		@Config.RequiresMcRestart
+		public int parallelLimitSupercomputer = 4096;
+		
+		@Config.Name("Parallel Limit")
+		@Config.Comment("Controls the maximum parallel multiblocks can preform")
+		@Config.RequiresMcRestart
+		public int parallelLimitQuantumComputer = 16384;
+		
+		@Config.Name("Parallel Limit")
+		@Config.Comment("Controls the maximum parallel multiblocks can preform")
+		@Config.RequiresMcRestart
+		public int parallelLimitCosmic = 65535;
 	}
 	
 	public static class PlanetOptions
