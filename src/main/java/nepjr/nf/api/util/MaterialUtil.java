@@ -88,6 +88,10 @@ public class MaterialUtil
 		/*
 		 * Unassigned materials
 		 */
+		if(materialRegistry.size() > 32767)
+		{
+			throw new ArrayIndexOutOfBoundsException("Material Registry is larger than the maximum materials allowed in GregTech!!! Something has gone horribly wrong!!! If you're not a dev and are seeing this message, let NepJr know!!!");
+		}
 		
 	}
 	
