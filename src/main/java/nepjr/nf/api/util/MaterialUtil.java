@@ -95,7 +95,7 @@ public class MaterialUtil
 		
 	}
 	
-	public int getMaterialTier(Material material)
+	public static int getMaterialTier(Material material)
 	{
 		return materialRegistry.get(material.getId())[0];
 	}
