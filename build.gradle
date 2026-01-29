@@ -99,7 +99,7 @@ legacyForge {
         client {
             client()
             sourceSet = sourceSets.main
-            programArguments.addAll('--refresh-dependencies')
+            programArguments.addAll('--refresh-dependencies', '--uuid=' + project.uuid, '--username=' + project.username)
             systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
         }
         server {
