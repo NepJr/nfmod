@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import xyz.nepjr.nfmod.common.NFMaterials;
 import xyz.nepjr.nfmod.common.machine.NFMachines;
 import xyz.nepjr.nfmod.common.recipes.NFRecipeTypes;
 
@@ -93,7 +94,7 @@ public class NepFactory {
      * @param event
      */
     private void addMaterials(MaterialEvent event) {
-        // CustomMaterials.init();
+        NFMaterials.init();
     }
 
     /**

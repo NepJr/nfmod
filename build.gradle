@@ -66,6 +66,14 @@ repositories {
     maven {
         url = "https://thedarkcolour.github.io/KotlinForForge/"
     }
+    maven {
+        name "Modmaven"
+        url "https://modmaven.dev/"
+        // For Gradle 5.1 and above, limit it to just AE2
+        content {
+            includeGroup 'appeng'
+        }
+    }
 
 }
 
@@ -157,6 +165,10 @@ dependencies {
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    
+    // AE2
+ 	jarJar(modImplementation("curse.maven:applied-energistics-2-223794:7148487"))
+    modImplementation("curse.maven:mae2-1028068:7084998")
 }
 
 // See com.example.examplemod.mixin.DummyMixin for information about mixins
