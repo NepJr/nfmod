@@ -10,5 +10,5 @@ import org.spongepowered.asm.mixin.Mixin;
 // but it is generally preferred that you try to use other means
 // to get your code to work before resorting to mixins,
 // as they can be highly invasive.
-// @Mixin(value = WorldgenRandom.class, remap = false)
+@Mixin(value = WorldgenRandom.class, remap = false)
 public class NepFactoryMixinPlugin {}

@@ -29,6 +29,7 @@ repositories {
         name = 'GTCEu Maven'
         url = 'https://maven.gtceu.com'
         content {
+		includeGroup 'appeng'
             includeGroup 'com.gregtechceu.gtceu'
         }
     }
@@ -167,7 +168,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     
     // AE2
- 	jarJar(modImplementation("curse.maven:applied-energistics-2-223794:7148487"))
+	jarJar(modImplementation("appeng:appliedenergistics2-forge:$project.ae2_version"))
+	modImplementation("org.appliedenergistics:guideme:${guideme_version}")
+	
     modImplementation("curse.maven:mae2-1028068:7084998")
 }
 
