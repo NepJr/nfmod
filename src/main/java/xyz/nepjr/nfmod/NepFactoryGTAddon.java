@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.addon.IGTAddon;
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import xyz.nepjr.nfmod.common.recipes.NFRecipes;
 
 import java.util.function.Consumer;
 
@@ -32,7 +33,7 @@ public class NepFactoryGTAddon implements IGTAddon {
 
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
-        // CustomRecipes.init(provider);
+        NFRecipes.init(provider);
     }
 
     @Override

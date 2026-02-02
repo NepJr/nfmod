@@ -1,17 +1,20 @@
 package xyz.nepjr.nfmod.common.machine;
 
-import static com.gregtechceu.gtceu.api.GTValues.EV;
-import static com.gregtechceu.gtceu.api.GTValues.UHV;
-import static com.gregtechceu.gtceu.api.GTValues.VLVH;
-import static com.gregtechceu.gtceu.api.GTValues.VLVT;
+import static com.gregtechceu.gtceu.api.GTValues.*;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STEEL_GEARBOX;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STEEL_TURBINE;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.defaultEnvironmentRequirement;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.defaultTankSizeFunction;
+import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerLargeTurbine;
+import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerSimpleGenerator;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerTieredMachines;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.workableTiered;
 
+import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTMedicalConditions;
@@ -25,18 +28,30 @@ import xyz.nepjr.nfmod.common.recipes.NFRecipeTypes;
 public class NFMachines 
 {
 	public static final MachineDefinition[] MATTER_FABRICATOR = registerSimpleMachines("matter_fabricator", NFRecipeTypes.UU_MATTER_FABRICATOR, defaultTankSizeFunction, false, "UU-Matter Fabricator", GTValues.tiersBetween(EV, UHV));
-	public static final MachineDefinition[] HIGH_TEMP_STEAM_TURBINE = registerSimpleMachines("high_temp_steam_turbine", NFRecipeTypes.HIGH_TEMP_STEAM_TURBINE, defaultTankSizeFunction, false, "High-Temperature Steam Turbine", GTValues.ALL_TIERS);
+	
+	// Generators
+	public static final MachineDefinition[] HIGH_TEMP_STEAM_TURBINE = registerSimpleGenerator("high_temp_steam_turbine",
+            NFRecipeTypes.HIGH_TEMP_STEAM_TURBINE, defaultTankSizeFunction, 0.0f, GTValues.ALL_TIERS);
+	
+	// Multiblock Generators
+	public static final MultiblockMachineDefinition LARGE_HIGH_TEMP_STEAM_TURBINE = registerLargeTurbine("high_temp_steam_large_turbine",
+            ZPM,
+            NFRecipeTypes.HIGH_TEMP_STEAM_TURBINE,
+            CASING_STEEL_TURBINE, CASING_STEEL_GEARBOX,
+            GTCEu.id("block/casings/mechanic/machine_casing_turbine_steel"),
+            GTCEu.id("block/multiblock/generator/large_steam_turbine"),
+            false);
 	
 	public static void init() {}
 	
 	// Borrowed from GTCA
-	    public static MachineDefinition[] registerSimpleMachines(String name,
+	public static MachineDefinition[] registerSimpleMachines(String name,
                                                              GTRecipeType recipeType,
                                                              Int2IntFunction tankScalingFunction,
                                                              boolean hasPollutionDebuff,
                                                              String lang,
                                                              int... tiers) {
-        return registerTieredMachines(name,
+    return registerTieredMachines(name,
                 (holder, tier) -> new SimpleTieredMachine(holder, tier, tankScalingFunction), (tier, builder) -> {
                     if (hasPollutionDebuff) {
                         builder.recipeModifiers(GTRecipeModifiers.ENVIRONMENT_REQUIREMENT
